@@ -1,4 +1,4 @@
-# Date calculator
+# Date Calculator
 
 To calculate your age in days and years.
 
