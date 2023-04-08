@@ -9,17 +9,18 @@ class Plant extends StatefulWidget {
 
 class _PlantState extends State<Plant> {
   int a = 0;
+  double years = 0;
 
-  Future dating() async {
+  Future getDate() async {
     DateTime? date = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
-    var data2 = DateTime.now();
-    var data3 = data2.difference(date!).inDays;
+    if (date == null) return;
+    a = DateTime.now().difference(date).inDays;
+    years = ((a / 1460) / 366) + (a / 365);
     setState(() {});
-    a = data3;
   }
 
   @override
@@ -38,7 +39,7 @@ class _PlantState extends State<Plant> {
                 children: <Widget>[
                   const Text('Choose Your Date'),
                   FloatingActionButton(
-                    onPressed: dating,
+                    onPressed: getDate,
                     child: const Icon(Icons.post_add_rounded),
                   )
                 ],
@@ -62,7 +63,7 @@ class _PlantState extends State<Plant> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         const Text('Years : '),
-                        Text('${(a / 365).toStringAsFixed(2)} Years'),
+                        Text('${years.toStringAsFixed(2)} Years'),
                       ],
                     ),
                   )
